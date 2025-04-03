@@ -11,6 +11,7 @@ export async function generateStaticParams() {
 }
 
 // Use more permissive typing for params
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata(props: any): Promise<Metadata> {
   const { params } = props;
   const post = await getPostData(params.slug);
@@ -30,6 +31,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 }
 
 // Use more permissive typing for the page component
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function BlogPostPage(props: any) {
   const { params } = props;
   const post = await getPostData(params.slug);
