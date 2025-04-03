@@ -3,17 +3,16 @@ import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import type { Metadata } from 'next';
 
 // Generate static paths for all posts at build time
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({
     slug,
   }));
 }
 
-// Generate metadata dynamically using inline param definition
-export async function generateMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
+// Use more permissive typing for params
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { params } = props;
   const post = await getPostData(params.slug);
 
   if (!post) {
@@ -30,10 +29,9 @@ export async function generateMetadata(
   };
 }
 
-// Define the page component using inline param definition
-export default async function BlogPostPage(
-  { params }: { params: { slug: string } }
-) {
+// Use more permissive typing for the page component
+export default async function BlogPostPage(props: any) {
+  const { params } = props;
   const post = await getPostData(params.slug);
 
   if (!post) {
