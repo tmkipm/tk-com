@@ -1,12 +1,8 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
 import PageTransitionWrapper from '@/components/PageTransitionWrapper';
-
-export const metadata: Metadata = {
-  title: 'Resume - Tyler Knibbs',
-  description: 'Professional resume of Tyler Knibbs, Data Analyst & Developer specializing in SQL, Power BI, and cloud technologies.',
-};
 
 const resumeData = {
   fullName: "Tyler Knibbs",

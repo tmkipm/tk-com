@@ -1,13 +1,17 @@
+'use client';
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
 import { motion } from 'framer-motion';
 import PageTransitionWrapper from '@/components/PageTransitionWrapper';
 
-export const metadata: Metadata = {
-  title: 'Contact - Tyler Knibbs',
-  description: 'Get in touch with Tyler Knibbs, Data Analyst & Developer. Fill out the contact form or reach out via email or LinkedIn.',
-};
+// Metadata cannot be used in client components directly
+// This will need to be moved to a separate file or handled differently
+// export const metadata: Metadata = {
+//   title: 'Contact - Tyler Knibbs',
+//   description: 'Get in touch with Tyler Knibbs, Data Analyst & Developer. Fill out the contact form or reach out via email or LinkedIn.',
+// };
 
 export default function ContactPage() {
   return (
