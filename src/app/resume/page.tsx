@@ -74,6 +74,20 @@ const resumeData = {
     { name: "Migrating to the AWS Cloud", issuer: "Amazon Web Services", grade: "95.78%" },
     { name: "AWS Cloud Technical Essentials", issuer: "Amazon Web Services", grade: "100%" },
     { name: "Architecting Solutions on AWS", issuer: "Amazon Web Services", grade: "97.14%" },
+    { name: "Databases and SQL for Data Science with Python", issuer: "IBM", grade: "92.62%" },
+    { name: "Introduction to Relational Databases (RDBMS)", issuer: "IBM", grade: "84.90%" },
+    { name: "Deploy and Maintain Power BI Assets and Capstone project", issuer: "Microsoft", grade: "93%" },
+    { name: "Introduction to Data Engineering", issuer: "IBM", grade: "93.20%" },
+    { name: "Python for Data Science, AI & Development", issuer: "IBM", grade: "84.66%" },
+    { name: "Hands-on Introduction to Linux Commands and Shell Scripting", issuer: "IBM", grade: "97%" },
+    { name: "Microsoft PL-300 Exam Preparation and Practice", issuer: "Microsoft", grade: "86%" },
+    { name: "Preparing Data for Analysis with Microsoft Excel", issuer: "Microsoft", grade: "87.33%" },
+    { name: "Extract, Transform and Load Data in Power BI", issuer: "Microsoft", grade: "83.66%" },
+    { name: "Harnessing the Power of Data with Power BI", issuer: "Microsoft", grade: "82.50%" },
+    { name: "Data Modeling in Power BI", issuer: "Microsoft", grade: "92.66%" },
+    { name: "Creative Designing in Power BI", issuer: "Microsoft", grade: "84%" },
+    { name: "Data Science Math Skills", issuer: "Duke University", grade: "98.07%" },
+    { name: "Foundations: Data, Data, Everywhere", issuer: "Google", grade: "94.12%" },
     { name: "Data Analysis and Visualization with Power BI", issuer: "Microsoft", grade: "88.33%" }
   ]
   // Add personal projects if desired
@@ -178,16 +192,80 @@ export default function ResumePage() {
         {/* Additional Courses/Training */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold border-b pb-2 mb-4 border-gray-200 dark:border-gray-700">Additional Courses</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {resumeData.courses.map((course, index) => (
-              <div key={index} className="mb-3">
-                <h3 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h3>
-                <div className="flex justify-between">
-                  <span className="text-gray-700 dark:text-gray-300">{course.issuer}</span>
-                  <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
-                </div>
+          
+          {/* Group courses by issuer for better organization */}
+          <div className="space-y-6">
+            {/* AWS Courses */}
+            <div>
+              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Amazon Web Services</h3>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {resumeData.courses
+                  .filter(course => course.issuer === "Amazon Web Services")
+                  .map((course, index) => (
+                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                      <div className="flex justify-between items-center mt-1 text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
+                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                      </div>
+                    </div>
+                  ))}
               </div>
-            ))}
+            </div>
+            
+            {/* Microsoft Courses */}
+            <div>
+              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Microsoft</h3>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {resumeData.courses
+                  .filter(course => course.issuer === "Microsoft")
+                  .map((course, index) => (
+                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                      <div className="flex justify-between items-center mt-1 text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
+                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            
+            {/* IBM Courses */}
+            <div>
+              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">IBM</h3>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {resumeData.courses
+                  .filter(course => course.issuer === "IBM")
+                  .map((course, index) => (
+                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                      <div className="flex justify-between items-center mt-1 text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
+                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            
+            {/* Other Courses */}
+            <div>
+              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Other Providers</h3>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {resumeData.courses
+                  .filter(course => !["Amazon Web Services", "Microsoft", "IBM"].includes(course.issuer))
+                  .map((course, index) => (
+                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                      <div className="flex justify-between items-center mt-1 text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
+                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
         </section>
       </div>
