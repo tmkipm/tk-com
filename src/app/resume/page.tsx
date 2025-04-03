@@ -77,6 +77,13 @@ const resumeData = {
   // Add personal projects if desired
 };
 
+const contactInfo = {
+  location: "London, GB",
+  email: "listed-14.tags@icloud.com",
+  linkedin: "linkedin.com/in/tyler-knibbs",
+  github: "github.com/tmkipm"
+};
+
 export default function ResumePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 print:space-y-4 bg-white dark:bg-gray-900 p-8 print:p-0 rounded-lg shadow-lg print:shadow-none">
@@ -86,7 +93,6 @@ export default function ResumePage() {
         <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400">{resumeData.title}</p>
         <div className="text-sm text-gray-600 dark:text-gray-400 mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1">
           <span>{resumeData.location}</span>
-          <span>{resumeData.phone}</span>
           <Link href={`mailto:${resumeData.email}`} className="hover:text-blue-500">{resumeData.email}</Link>
           <Link href={resumeData.linkedIn} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">LinkedIn</Link>
         </div>

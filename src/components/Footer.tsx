@@ -15,7 +15,7 @@ const Footer = () => {
           <Link href="#" className="hover:text-blue-500 dark:hover:text-blue-400">
             GitHub
           </Link>
-          <Link href="mailto:Tknibbs31@gmail.com" className="hover:text-blue-500 dark:hover:text-blue-400">
+          <Link href="mailto:listed-14.tags@icloud.com" className="hover:text-blue-500 dark:hover:text-blue-400">
             Email
           </Link>
         </div>
