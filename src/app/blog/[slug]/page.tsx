@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getAllPostSlugs, getPostData, PostFrontmatter } from '@/lib/posts';
+import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import type { Metadata } from 'next';
 
 interface BlogPostPageProps {
