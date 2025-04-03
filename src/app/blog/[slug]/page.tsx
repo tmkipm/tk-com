@@ -2,22 +2,24 @@ import { notFound } from 'next/navigation';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import type { Metadata } from 'next';
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
+// Define Props type directly, aligning with Next.js expectations
+type Props = {
+  params: { slug: string };
+  // Include searchParams if needed, though unused here
+  // searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 // Generate static paths for all posts at build time
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
+  // Ensure the returned structure matches { slug: string }[]
   return slugs.map((slug) => ({
     slug,
   }));
 }
 
-// Generate metadata dynamically based on post frontmatter
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+// Generate metadata dynamically using the Props type
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostData(params.slug);
 
   if (!post) {
@@ -34,7 +36,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+// Define the page component using the Props type
+export default async function BlogPostPage({ params }: Props) {
   const post = await getPostData(params.slug);
 
   if (!post) {
