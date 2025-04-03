@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Instantiate Resend client with API key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
-const receiverEmail = process.env.CONTACT_FORM_RECEIVER_EMAIL;
+// Don't initialize at the top level - move initialization inside the POST handler
+// const resend = new Resend(process.env.RESEND_API_KEY);
+// const receiverEmail = process.env.CONTACT_FORM_RECEIVER_EMAIL;
 
 export async function POST(request: Request) {
   // Check if required environment variables are set
@@ -11,10 +11,15 @@ export async function POST(request: Request) {
     console.error('RESEND_API_KEY environment variable is not set.');
     return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
   }
+  
+  const receiverEmail = process.env.CONTACT_FORM_RECEIVER_EMAIL;
   if (!receiverEmail) {
     console.error('CONTACT_FORM_RECEIVER_EMAIL environment variable is not set.');
     return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
   }
+
+  // Initialize the Resend client only when needed in the request handler
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     const body = await request.json();
