@@ -1,9 +1,9 @@
 'use client'; // Required for motion components
 
-import Link from 'next/link';
-// Removed Metadata import as it cannot be used in client component
 import { motion } from 'framer-motion'; // Import motion
 import TechStackGrid from '@/components/TechStackGrid';
+import HeroSection from '@/components/HeroSection';
+import SkillsGrid from '@/components/SkillsGrid';
 
 // Metadata should be defined in layout or via generateMetadata if needed
 // export const metadata: Metadata = { ... };
@@ -27,72 +27,19 @@ const itemVariants = {
 export default function Home() {
   // Extract relevant info from CV for easy use
   const professionalSummary = "Experienced Data Analyst and Developer specializing in SQL, Power BI, Python, and Azure, with a strong track record in data migrations, analytics automation, and strategic decision-making support. Skilled in agile environments, I excel in translating complex technical challenges into clear insights. My expertise includes data analytics, data engineering, databases, education, cloud migrations, and implementing secure data solutions in highly regulated industries.";
-  const skills = ["SQL", "Power BI", "Azure", "Python", ".NET", "AWS"];
-  const techStack = ["React", "Next.js", "Tailwind CSS", "SQL", "Python", "Power BI", "Azure"]; // Example stack
 
   return (
-    <div className="space-y-20">
-      {/* Hero Section */}
-      <section className="text-center py-16 bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-lg shadow-sm pb-24">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          Tyler Knibbs
-        </h1>
-        <h2 className="text-2xl md:text-3xl text-blue-600 dark:text-blue-400 mb-6">
-          Developer & Data Analyst
-        </h2>
-        <p className="max-w-3xl mx-auto text-gray-700 dark:text-gray-300 mb-8 px-4">
-          {professionalSummary}
-        </p>
-        <div className="space-x-4">
-          <motion.div className="inline-block" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/portfolio" className="block bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300">
-              View Portfolio
-            </Link>
-          </motion.div>
-          <motion.div className="inline-block" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/contact" className="block bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-semibold hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition duration-300">
-              Get in Touch
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+    <div>
+      {/* Enhanced Hero Section */}
+      <HeroSection professionalSummary={professionalSummary} />
 
-      {/* Skills Grid with Staggered Animation */}
-      <section className="pb-24">
-        <motion.h3 
-          className="text-3xl font-semibold text-center mb-8 mt-24 text-gray-900 dark:text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          Core Skills
-        </motion.h3>
-        <motion.div 
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {skills.map((skill) => (
-            <motion.div 
-              key={skill} 
-              className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-sm cursor-default"
-              variants={itemVariants}
-              whileHover={{ scale: 1.1, y: -5, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
-              transition={{ duration: 0.2 }}
-            >
-              <p className="font-medium text-gray-800 dark:text-gray-200">{skill}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+      {/* Enhanced Skills Grid */}
+      <SkillsGrid />
 
       {/* Enhanced Experience & Education Timeline Section */}
-      <section className="pb-24">
+      <section className="py-20">
          <motion.h3 
-          className="text-3xl font-semibold text-center mb-8 mt-24 text-gray-900 dark:text-white"
+          className="text-3xl font-semibold text-center mb-16 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -216,7 +163,7 @@ export default function Home() {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50/50 dark:bg-gray-900/30">
         <motion.h3 
           className="text-3xl font-semibold text-center mb-12 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}

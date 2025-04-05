@@ -24,3 +24,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(100,100,100,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100,100,100,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
