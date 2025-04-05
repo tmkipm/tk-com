@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
 import PageTransitionWrapper from '@/components/PageTransitionWrapper';
+import CollapsibleSection from '@/components/CollapsibleSection';
 
 const resumeData = {
   fullName: "Tyler Knibbs",
@@ -92,6 +93,16 @@ const resumeData = {
   ]
   // Add personal projects if desired
 };
+
+// Group courses by provider for easier filtering
+const courseProviders = [
+  { name: "Amazon Web Services", displayName: "Amazon Web Services" },
+  { name: "Microsoft", displayName: "Microsoft" },
+  { name: "IBM", displayName: "IBM" },
+  { name: "Other", displayName: "Other Providers", filter: (issuer: string) => 
+    !["Amazon Web Services", "Microsoft", "IBM"].includes(issuer) 
+  }
+];
 
 export default function ResumePage() {
   return (
@@ -189,98 +200,64 @@ export default function ResumePage() {
           </section>
         </div>
 
-        {/* Additional Courses/Training - Simple list to ensure all are visible */}
+        {/* Additional Courses/Training - Collapsible sections by provider */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold border-b pb-2 mb-4 border-gray-200 dark:border-gray-700">Additional Courses</h2>
+          <h2 className="text-2xl font-bold border-b pb-2 mb-4 border-gray-200 dark:border-gray-700">
+            Courses & Training
+          </h2>
           
-          <div className="space-y-6">
-            {/* AWS Courses */}
-            <div>
-              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Amazon Web Services</h3>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
-                {resumeData.courses
-                  .filter(course => course.issuer === "Amazon Web Services")
-                  .map((course, index) => (
-                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
-                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
-                      <div className="flex justify-between items-center mt-1 text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">{course.issuer}</span>
-                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+          <div className="space-y-4 mt-6">
+            {courseProviders.map((provider) => {
+              // Filter courses based on provider
+              const filteredCourses = provider.name === "Other" 
+                ? resumeData.courses.filter(course => provider.filter?.(course.issuer))
+                : resumeData.courses.filter(course => course.issuer === provider.name);
+              
+              // Skip if no courses for this provider
+              if (filteredCourses.length === 0) return null;
+              
+              return (
+                <CollapsibleSection 
+                  key={provider.name} 
+                  title={provider.displayName}
+                  count={filteredCourses.length}
+                >
+                  <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
+                    {filteredCourses.map((course, index) => (
+                      <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                        <div className="flex justify-between items-center mt-1 text-sm">
+                          <span className="text-gray-500 dark:text-gray-400">
+                            {provider.name === "Other" ? course.issuer : ""}
+                          </span>
+                          <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-            
-            {/* Microsoft Courses */}
-            <div>
-              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Microsoft</h3>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
-                {resumeData.courses
-                  .filter(course => course.issuer === "Microsoft")
-                  .map((course, index) => (
-                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
-                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
-                      <div className="flex justify-between items-center mt-1 text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">{course.issuer}</span>
-                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-            
-            {/* IBM Courses */}
-            <div>
-              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">IBM</h3>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
-                {resumeData.courses
-                  .filter(course => course.issuer === "IBM")
-                  .map((course, index) => (
-                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
-                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
-                      <div className="flex justify-between items-center mt-1 text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">{course.issuer}</span>
-                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-            
-            {/* Other Courses */}
-            <div>
-              <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">Other Providers</h3>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3">
-                {resumeData.courses
-                  .filter(course => !["Amazon Web Services", "Microsoft", "IBM"].includes(course.issuer))
-                  .map((course, index) => (
-                    <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
-                      <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
-                      <div className="flex justify-between items-center mt-1 text-sm">
-                        <span className="text-gray-500 dark:text-gray-400">{course.issuer}</span>
-                        <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
+                    ))}
+                  </div>
+                </CollapsibleSection>
+              );
+            })}
           </div>
           
-          {/* Fallback list to ensure all courses are visible */}
+          {/* Complete course list (collapsible) */}
           <div className="mt-8 border-t pt-4 border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-semibold mb-4">Complete Course List</h3>
-            <div className="space-y-3">
-              {resumeData.courses.map((course, index) => (
-                <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
-                  <div className="flex justify-between items-center mt-1">
-                    <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
-                    <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+            <CollapsibleSection 
+              title="Complete Course List" 
+              count={resumeData.courses.length}
+            >
+              <div className="space-y-3">
+                {resumeData.courses.map((course, index) => (
+                  <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200">{course.name}</h4>
+                    <div className="flex justify-between items-center mt-1">
+                      <span className="text-gray-600 dark:text-gray-400">{course.issuer}</span>
+                      <span className="text-green-600 dark:text-green-400 font-medium">{course.grade}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </CollapsibleSection>
           </div>
         </section>
       </div>
