@@ -23,8 +23,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden h-full flex flex-col">
       {imageUrl && (
         <div className="relative h-48 w-full">
-          {/* Use priority if image is above the fold or critical */}
-          <Image src={imageUrl} alt={`${title} preview`} layout="fill" objectFit="cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+          {/* Use loading="lazy" for images that aren't critical above the fold */}
+          <Image 
+            src={imageUrl} 
+            alt={`${title} preview`} 
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            className="object-cover"
+            loading="lazy"
+            placeholder="blur" 
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJc8ZrDcwAAAABJRU5ErkJggg=="
+          />
         </div>
       )}
       <div className="p-4 flex flex-col flex-grow">
@@ -57,11 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // If projectUrl exists, wrap the motion element in a Link
   if (projectUrl) {
     return (
-      <Link href={projectUrl} passHref legacyBehavior>
-         {/* We use legacyBehavior + an inner `a` tag (implicit via motion.a or added manually if motion.div) 
-             or rely on Next.js handling the motion component if it forwards refs correctly.
-             Simplest for now is often just wrapping the motion.div. 
-             If Link issues arise, consider motion.a or explicit `<a>` tag. */}
+      <Link href={projectUrl} className="block h-full">
         {cardContent}
       </Link>
     );
