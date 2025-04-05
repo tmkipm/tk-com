@@ -7,14 +7,12 @@ export async function generateStaticParams() {
   return paths.map((slug) => ({ slug }));
 }
 
-// Updated props type definition to match Next.js expectation
-interface PageProps {
-  params: { slug: string };
-  searchParams: Record<string, string | string[] | undefined>;
-}
-
-// Generate metadata for the page
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+// Generate metadata for the page using the built-in types
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
   const postData = await getPostData(params.slug);
   
   if (!postData) {
@@ -30,8 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Use correct props type for the page component
-export default async function Post({ params }: PageProps) {
+// Use built-in Next.js typing for the page component
+export default async function Post({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
   const postData = await getPostData(params.slug);
   
   // If postData is null, return a fallback message
