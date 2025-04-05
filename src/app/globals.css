@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,14 +17,87 @@
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Blog post image placeholder styles */
+.image-container {
+  @apply my-8 rounded-lg overflow-hidden shadow-lg;
+}
+
+.placeholder-image {
+  @apply h-64 flex items-center justify-center text-white font-bold text-xl p-6 text-center;
+  background-color: #4a90e2;
+}
+
+.placeholder-image.stock-preview {
+  background: linear-gradient(135deg, #4a90e2 0%, #357ae8 100%);
+}
+
+.placeholder-image.chart-component {
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+}
+
+.placeholder-image.prediction-graph {
+  background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+}
+
+.placeholder-image.technical-indicators {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+/* MDX Content Styling */
+.mdx-content h1 {
+  @apply text-3xl font-bold mt-8 mb-4;
+}
+
+.mdx-content h2 {
+  @apply text-2xl font-bold mt-6 mb-3;
+}
+
+.mdx-content h3 {
+  @apply text-xl font-bold mt-5 mb-2;
+}
+
+.mdx-content p {
+  @apply my-4;
+}
+
+.mdx-content ul {
+  @apply list-disc pl-5 my-4;
+}
+
+.mdx-content ol {
+  @apply list-decimal pl-5 my-4;
+}
+
+.mdx-content a {
+  @apply text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline;
+}
+
+.mdx-content pre {
+  @apply bg-gray-100 dark:bg-gray-900 rounded-lg p-4 overflow-x-auto my-4;
+}
+
+.mdx-content code {
+  @apply bg-gray-100 dark:bg-gray-900 rounded px-1 py-0.5 text-sm;
+}
+
+.mdx-content blockquote {
+  @apply border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4;
+}
+
+.mdx-content hr {
+  @apply my-8 border-t border-gray-300 dark:border-gray-700;
+}
 
 @layer utilities {
   .bg-grid-pattern {

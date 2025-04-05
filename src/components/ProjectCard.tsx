@@ -66,7 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // If projectUrl exists, wrap the motion element in a Link
   if (projectUrl) {
     return (
-      <Link href={projectUrl} className="block h-full">
+      <Link href={projectUrl} className="block h-full" target="_blank" rel="noopener noreferrer">
         {cardContent}
       </Link>
     );

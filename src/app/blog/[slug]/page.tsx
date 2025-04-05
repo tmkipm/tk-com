@@ -1,73 +1,65 @@
-import { notFound } from 'next/navigation';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import type { Metadata } from 'next';
 
 // Generate static paths for all posts at build time
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  const paths = getAllPostSlugs();
+  return paths.map((slug) => ({ slug }));
 }
 
-// Use more permissive typing for params
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(props: any): Promise<Metadata> {
-  const { params } = props;
-  const post = await getPostData(params.slug);
+// Type definition for the page component props
+type Props = {
+  params: { slug: string };
+};
 
-  if (!post) {
-    return {
-        title: 'Post Not Found',
-        description: 'This blog post could not be found.',
-    };
-  }
-
+// Generate metadata for the page
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // Get the post data
+  const postData = await getPostData(params.slug);
   return {
-    title: `${post.frontmatter.title} - Tyler Knibbs Blog`,
-    description: post.frontmatter.description,
-    // Add other metadata like open graph tags if desired
+    title: postData.title,
+    description: postData.description,
   };
 }
 
+// Custom components for MDX rendering that handle missing images gracefully
+const mdxComponents = {
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <div className="my-8 rounded-lg overflow-hidden shadow-lg">
+      <img 
+        {...props} 
+        className="w-full h-64 object-cover bg-blue-100 dark:bg-blue-800"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.onerror = null; // Prevent infinite loop
+          target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%234a90e2'/%3E%3Ctext x='400' y='200' font-family='Arial' font-size='32' fill='white' text-anchor='middle' dominant-baseline='middle'%3E" + (props.alt || 'Image placeholder') + "%3C/text%3E%3C/svg%3E";
+        }}
+      />
+    </div>
+  ),
+};
+
 // Use more permissive typing for the page component
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function BlogPostPage(props: any) {
-  const { params } = props;
-  const post = await getPostData(params.slug);
-
-  if (!post) {
-    notFound(); // Show 404 page if post doesn't exist
-  }
-
-  const formattedDate = new Date(post.frontmatter.date + 'T00:00:00Z')
-    .toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'UTC',
-  });
+export default async function Post({ params }: Props) {
+  const postData = await getPostData(params.slug);
 
   return (
-    <article className="prose prose-lg dark:prose-invert max-w-3xl mx-auto py-8">
-      {/* Article Header */}
-      <header className="mb-8 border-b pb-4 dark:border-gray-700">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 !leading-tight">{post.frontmatter.title}</h1>
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          <span>Published on {formattedDate}</span>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {post.frontmatter.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-2 py-1 rounded-full no-underline">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      {/* Render the compiled MDX content */}
-      {post.content}
-
+    <article className="prose dark:prose-invert lg:prose-xl mx-auto py-8">
+      <h1>{postData.title}</h1>
+      <div className="text-gray-600 dark:text-gray-400">
+        <time dateTime={postData.date}>{postData.date}</time>
+      </div>
+      <div className="flex flex-wrap gap-2 mt-4 mb-8">
+        {postData.tags && postData.tags.map((tag: string) => (
+          <span key={tag} className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-1 rounded-full text-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div
+        className="mdx-content"
+        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+      />
     </article>
   );
 }

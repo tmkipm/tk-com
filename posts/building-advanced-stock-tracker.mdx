@@ -5,9 +5,13 @@ description: "A deep dive into creating a sophisticated stock tracking applicati
 tags: ["Next.js", "TypeScript", "AI", "Financial Tech", "Data Visualization"]
 ---
 
+# Building an Advanced Stock Tracker with Next.js and AI Predictions
+
 In this blog post, I'll walk through the process of building an advanced stock tracker application with Next.js, TypeScript, and AI-powered predictions. This project combines modern web development practices with financial data analysis and machine learning to create a powerful tool for tracking and analyzing stocks.
 
-![Stock Tracker Preview](/assets/blog/stock-tracker-preview.png)
+<div className="image-container">
+  <div className="placeholder-image stock-preview">Stock Tracker Preview</div>
+</div>
 
 ## Project Overview
 
@@ -39,7 +43,7 @@ The application is built with:
 
 The first challenge was setting up a modern Next.js project with TypeScript and Tailwind CSS. I created a clean, maintainable file structure following Next.js best practices, with components, lib utilities, and API services properly organized.
 
-```
+```tsx
 stock-tracker/
 ├── src/
 │   ├── app/              # Next.js App Router
@@ -63,7 +67,9 @@ The core functionality was implemented in several stages:
 
 A key challenge during this phase was managing state effectively across components. I implemented a clean state management approach using React hooks and context where appropriate.
 
-![Stock Chart Component](/assets/blog/stock-chart-component.png)
+<div className="image-container">
+  <div className="placeholder-image chart-component">Stock Chart Component</div>
+</div>
 
 ### Phase 3: Implementing Mock Data
 
@@ -125,7 +131,9 @@ function arimaInspiredPrediction(data: number[], daysToPredict: number): number[
 }
 ```
 
-![AI Prediction Graph](/assets/blog/ai-prediction-graph.png)
+<div className="image-container">
+  <div className="placeholder-image prediction-graph">AI Prediction Graph</div>
+</div>
 
 #### Technical Indicators
 
@@ -201,7 +209,9 @@ The LLM analyzes historical data to provide:
 
 **Solution**: Designed a tabbed interface that progressively reveals complexity. Used appropriate visualizations (line charts, bar charts, etc.) for different data types.
 
-![Technical Indicators](/assets/blog/technical-indicators.png)
+<div className="image-container">
+  <div className="placeholder-image technical-indicators">Technical Indicators</div>
+</div>
 
 ### 5. Responsive Design for Data-Heavy UI
 
@@ -251,7 +261,16 @@ Building the Advanced Stock Tracker was a rewarding journey that combined modern
 
 The most satisfying aspect was seeing how the mock data system and AI predictions came together to create a seamless experience that mimics real-world trading platforms. As financial APIs continue to improve and AI models become more sophisticated, I'm excited about the possibilities for enhancing this application further.
 
-You can explore the [Advanced Stock Tracker here](https://stocktracker-tmkipms-projects.vercel.app).
+<div className="my-6">
+  <a 
+    href="https://stocktracker-tmkipms-projects.vercel.app" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+  >
+    Explore the Advanced Stock Tracker
+  </a>
+</div>
 
 ---
 
