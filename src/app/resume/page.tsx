@@ -38,6 +38,19 @@ const resumeData = {
       ]
     },
     {
+      title: "Data & IT Apprenticeship Instructor",
+      company: "Contract Work",
+      period: "Apr 2024 – Feb 2025",
+      responsibilities: [
+        "Designed and delivered comprehensive training programs for Level 4 IT and Data Analytics apprentices from organizations including the NHS, following BCS (British Computer Society) standards and frameworks.",
+        "Created bespoke curriculum materials focusing on real-world applications of SQL, Python, Power BI and data visualization techniques that directly addressed workplace challenges faced by apprentices.",
+        "Mentored NHS and healthcare sector apprentices in implementing data-driven solutions, helping them transform departmental reporting processes and improve operational efficiency in clinical environments.",
+        "Facilitated hands-on workshops that empowered apprentices to apply technical skills to their specific workplace projects, resulting in measurable improvements in their organizations' data processes.",
+        "Developed and administered assessments aligned with BCS requirements, providing detailed feedback and personalized development plans for each apprentice.",
+        "Maintained 95% apprentice satisfaction ratings through adaptive teaching approaches that accommodated diverse learning styles and technical backgrounds."
+      ]
+    },
+    {
       title: "Junior Developer for Data Services",
       company: "Stratagem IPM",
       period: "Aug 2021 – Mar 2023",
@@ -46,15 +59,6 @@ const resumeData = {
         "Transitioned firm-wide reporting from SSRS to Power BI, enhancing visualization and operational decision-making capabilities.",
         "Automated monthly financial reporting, cutting manual effort by 16 hours/month/employee.",
         "Delivered client-specific reporting solutions and technical support, significantly improving client satisfaction and operational efficiency."
-      ]
-    },
-    {
-      title: "Data & IT Apprenticeship Instructor",
-      company: "Contract Work",
-      period: "Apr 2024 – Feb 2025",
-      responsibilities: [
-        "Delivered training and mentoring for Level 4 IT and Data Analytics apprentices, covering SQL, Python, data visualization, cloud computing fundamentals, and professional best practices.",
-        "Developed curriculum, delivered structured lectures, assessed practical projects, and provided direct career mentorship."
       ]
     }
   ],
