@@ -8,22 +8,6 @@ import SkillsGrid from '@/components/SkillsGrid';
 // Metadata should be defined in layout or via generateMetadata if needed
 // export const metadata: Metadata = { ... };
 
-// Define animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1, // Stagger children by 0.1s
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  show: { y: 0, opacity: 1 },
-};
-
 export default function Home() {
   // Extract relevant info from CV for easy use
   const professionalSummary = "Experienced Data Analyst and Developer specializing in SQL, Power BI, Python, and Azure, with a strong track record in data migrations, analytics automation, and strategic decision-making support. Skilled in agile environments, I excel in translating complex technical challenges into clear insights. My expertise includes data analytics, data engineering, databases, education, cloud migrations, and implementing secure data solutions in highly regulated industries.";
