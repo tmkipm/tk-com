@@ -1,7 +1,5 @@
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import type { Metadata } from 'next';
-import { MDXProvider } from '@mdx-js/react';
-import MDXComponents from '../mdx-components';
 
 // Generate static paths for all posts at build time
 export async function generateStaticParams() {
