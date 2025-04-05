@@ -3,6 +3,7 @@
 import Link from 'next/link';
 // Removed Metadata import as it cannot be used in client component
 import { motion } from 'framer-motion'; // Import motion
+import TechStackGrid from '@/components/TechStackGrid';
 
 // Metadata should be defined in layout or via generateMetadata if needed
 // export const metadata: Metadata = { ... };
@@ -214,38 +215,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tech Stack (Placeholder Icons) */}
-      <section className="pb-24">
+      {/* Tech Stack Section */}
+      <section className="py-16">
         <motion.h3 
-          className="text-3xl font-semibold text-center mb-8 mt-24 text-gray-900 dark:text-white"
+          className="text-3xl font-semibold text-center mb-12 text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
         >
-          Tech Stack
+          Technical Expertise
         </motion.h3>
-        <motion.div 
-          className="flex flex-wrap justify-center items-center gap-6 text-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {techStack.map((tech) => (
-            <motion.div 
-              key={tech} 
-              className="flex flex-col items-center space-y-2 cursor-default"
-              variants={itemVariants}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Placeholder for actual icons */}
-              <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-xs font-mono text-gray-500 dark:text-gray-400">Icon</div>
-              <p className="text-sm text-gray-700 dark:text-gray-300">{tech}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="max-w-6xl mx-auto px-4">
+          <TechStackGrid />
+        </div>
       </section>
 
     </div>
