@@ -10,6 +10,14 @@ import { motion } from 'framer-motion'; // Import motion
 // Placeholder project data with added categories for filtering
 const projects = [
   {
+    title: "Advanced Stock Tracker",
+    description: "A sophisticated stock tracking application with AI-powered price predictions, technical analysis indicators, and interactive charts.",
+    tags: ["Next.js", "TypeScript", "AI", "Tailwind CSS", "Data Visualization"],
+    projectUrl: "https://stocktracker-tmkipms-projects.vercel.app",
+    category: "Web Dev",
+    imageUrl: "/assets/blog/stock-tracker-preview.png"
+  },
+  {
     title: "Project Alpha",
     description: "A brief description of Project Alpha focusing on data analysis techniques.",
     tags: ["Data Analysis", "Power BI", "SQL"],
